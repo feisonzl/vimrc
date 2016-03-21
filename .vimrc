@@ -1,2 +1,3 @@
-nmap <c - c> "+y
-nmap <c - v> "+p
+set ts=4
+set expandtab
+set nu
