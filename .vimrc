@@ -4,7 +4,13 @@ hi Type ctermfg =yellow
 hi Statement ctermfg =darkyellow
 
 set ts=4
-set expandtab
+
+"空格替换为TAB
+set noexpandtab
+
+"只处理行首TAB键
+:%retab
+
 set nu
 filetype on
 set background=dark
