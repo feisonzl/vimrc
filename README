@@ -1,5 +1,7 @@
 我的vim配置：vim+cscope+minibufexp+taglist+netrw
+
 netrw.vim:http://www.vim.org/scripts/script.php?script_id=1075
+needs vim 7.3.465 or later
 install details
 netrw is now distributed as a vimball!  (see :help vimball) 
 You'll need a vimball plugin v18 or later (see vimscript#1502). 
