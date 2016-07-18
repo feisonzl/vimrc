@@ -1,7 +1,8 @@
-hi Comment ctermfg =green
-hi String ctermfg =darkred
-hi Type ctermfg =yellow
-hi Statement ctermfg =darkyellow
+"hi Comment ctermfg =green
+"hi String ctermfg =darkred
+"hi Type ctermfg =yellow
+"hi Statement ctermfg =darkyellow
+colorscheme desert
 
 set ts=4
 
