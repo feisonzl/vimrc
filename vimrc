@@ -68,7 +68,7 @@ let g:winManagerWindowLayout='FileExplorer|TagList'
 "let g:AutoOpenWinManager = 1 "自动打开wm功能
 "自动打开wm
 autocmd VimEnter * nested execute  ":WMToggle"
-
+"autocmd bufenter * if (winnr("$") == 2 && exists("b:")&&b:NERDTreeType == "primary")  | qa | endif
 "cscope
 nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
