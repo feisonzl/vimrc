@@ -37,14 +37,25 @@ set showcmd
 "syntastic
 let g:syntastic_c_include_dirs=['/usr/src/kernels/2.6.27.41-170.2.117.fc10.i    686/include/','/home/feison/work/study/drivers/']
 
-au FileType c setlocal dict+=~/.vim/dict/c,dict
+au FileType c setlocal dict+=~/.vim/dict/c.dict
 
 "ctags
-set tags=/root/feison_work/study/examples/scull/tags
+
+"按下F5重新生成tags文件，并更新taglist
+map <F7> :!ctags -I __THROW -I __attribute_pure__ -I __nonnull -I __attribute__ --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q  -f ~/.vim/systags /usr/include/* /home/feison/zlwork/nanopi/linux-3.4.y/include/* 
+"/usr/include/sys/* /usr/include/bits/*  /usr/include/netinet/* /usr/include/arpa/* /usr/include/mysql/*
+"map <F6> :!ctags --fields=+iaS --extra=+q -R -f ~/.vim/systags /usr/include /usr/local/include
+"map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+set tags+=./tags "add current directory's generated tags file
+set tags+=~/.vim/systags
+set tags+=~/arm/linux-2.6.24.7/tags 
+"set tags=/root/feison_work/study/examples/scull/tags
+set tags=tags
 
 
 "taglist.vim
-let Tlist_Ctags_Cmd= "/usr/local/bin/ctags"
+let Tlist_Ctags_Cmd= "/usr/bin/ctags"
 "let Tlist_Show_One_File = 1
 let Tlist_Sort_Type= "name"
 "let Tlist_Use_Right_Window = 1
