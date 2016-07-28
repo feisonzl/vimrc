@@ -35,7 +35,7 @@ set incsearch
 "display input command
 set showcmd
 "syntastic
-let g:syntastic_c_include_dirs=['/usr/src/kernels/2.6.27.41-170.2.117.fc10.i    686/include/','/home/feison/work/study/drivers/']
+let g:syntastic_c_include_dirs=['/usr/src/kernels/2.6.27.41-170.2.117.fc10.i686/include/','/home/feison/work/study/drivers/']
 
 au FileType c setlocal dict+=~/.vim/dict/c.dict
 
@@ -44,12 +44,13 @@ au FileType c setlocal dict+=~/.vim/dict/c.dict
 "按下F5重新生成tags文件，并更新taglist
 map <F7> :!ctags -I __THROW -I __attribute_pure__ -I __nonnull -I __attribute__ --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q  -f ~/.vim/systags /usr/include/* /home/feison/zlwork/nanopi/linux-3.4.y/include/* 
 "/usr/include/sys/* /usr/include/bits/*  /usr/include/netinet/* /usr/include/arpa/* /usr/include/mysql/*
-"map <F6> :!ctags --fields=+iaS --extra=+q -R -f ~/.vim/systags /usr/include /usr/local/include
+map <F6> :!ctags --fields=+iaS --extra=+q -R -f ~/.vim/systags /usr/include /usr/local/include
 "map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags+=./tags "add current directory's generated tags file
 set tags+=~/.vim/systags
-set tags+=~/arm/linux-2.6.24.7/tags 
+set tags+=~/arm/linux-2.6.24.7/tags
+set tags+=/usr/src/kernels/2.6.27.41-170.2.117.fc10.i686/tags
 "set tags=/root/feison_work/study/examples/scull/tags
 set tags=tags
 
@@ -63,8 +64,37 @@ let Tlist_Sort_Type= "name"
 let Tlist_Exit_OnlyWindow=1
 "let Tlist_Auto_Open=1
 "智能补全
-filetype plugin indent on
+set nocp
+filetype plugin on
+
 set completeopt=longest,menu
+
+"omnicomplete plugin
+"NOTE:
+"you must create tags db before you using omni!
+"create tags db as bellow,otherwise you will get 'Omni completion(^O^N^P)Pattern not found:'
+"ctags -R --C-kinds=+p --fields=+aS --extra=+q
+"ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " 显示函数参数列表
+let OmniCpp_MayCompleteDot = 1   " 输入 .  后自动补全
+let OmniCpp_MayCompleteArrow = 1 " 输入 -> 后自动补全
+let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+"
+"Pmenu 所有待选项背景色和前景色
+highlight Pmenu    guibg=darkgrey  guifg=black 
+"
+"PmenuSel 选中项的背景色和前景色
+highlight PmenuSel guibg=lightgrey guifg=black
+"" 自动关闭补全窗口
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest
+
+
+
 "智能补全增强 supertab.vmb
 let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType="<C-X><C-O>"
@@ -81,6 +111,24 @@ let g:winManagerWindowLayout='FileExplorer|TagList'
 autocmd VimEnter * nested execute  ":WMToggle"
 "autocmd bufenter * if (winnr("$") == 2 && exists("b:")&&b:NERDTreeType == "primary")  | qa | endif
 "cscope
+if has("cscope") && filereadable("/usr/bin/cscope")
+   set csprg=/usr/bin/cscope
+   set csto=0
+   set cst
+   set nocsverb
+   " add any database in current directory
+   if filereadable("cscope.out")
+      cs add cscope.out
+   " else add database pointed to by environment
+   elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+   endif
+   if filereadable("/usr/src/kernels/2.6.27.41-170.2.117.fc10.i686/cscope.out")
+	   cs add /usr/src/kernels/2.6.27.41-170.2.117.fc10.i686/cscope.out
+   endif
+   set csverb
+endif
+
 nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
