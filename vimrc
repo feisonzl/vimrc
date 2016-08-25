@@ -29,7 +29,8 @@ set shiftwidth=4
 
 "设置匹配模式
 set showmatch
-
+"鼠标支持
+set mouse=a
 "智能查找
 set incsearch
 
