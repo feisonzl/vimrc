@@ -6,6 +6,7 @@ colorscheme desert
 
 set ts=4
 
+
 "空格替换为TAB
 set noexpandtab
 
@@ -45,9 +46,9 @@ au FileType c setlocal dict+=~/.vim/dict/c.dict
 "map <F7> :!ctags -I __THROW -I __attribute_pure__ -I __nonnull -I __attribute__ --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q  -f ~/.vim/systags /usr/include/* /home/feison/zlwork/nanopi/linux-3.4.y/include/* 
 "/usr/include/sys/* /usr/include/bits/*  /usr/include/netinet/* /usr/include/arpa/* /usr/include/mysql/*
 "map <F6> :!ctags --fields=+iaS --extra=+q -R -f ~/.vim/systags /usr/include /usr/local/include
-"map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 map <F5> :!ctags -R --c-kinds=+p --fields=+laS --extra=+q .<CR><CR> :TlistUpdate<CR>
-map <F6> :!cscope -Rkbq .<CR><CR> :TlistUpdate<CR>
+map <F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
+map <F7> :!cscope -Rkbq .<CR><CR> :TlistUpdate<CR>
 
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
@@ -64,6 +65,7 @@ let Tlist_Sort_Type= "name"
 "let Tlist_Use_Right_Window = 1
 "let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
+"let Tlist_WinWidth=50
 "let Tlist_Auto_Open=1
 "智能补全
 set nocp
@@ -107,6 +109,7 @@ nnoremap <silent> <F12> :A<CR>
 set nocompatible "避免vi和vim的冲突
 "let loaded_winmanager = 1   "关闭wm功能
 let g:winManagerWindowLayout='FileExplorer|TagList'
+let g:winManagerWidth=50
 "nmap wm :WMToggle<cr>
 "let g:AutoOpenWinManager = 1 "自动打开wm功能
 "自动打开wm
