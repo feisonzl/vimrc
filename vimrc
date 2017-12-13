@@ -49,7 +49,7 @@ au FileType c setlocal dict+=~/.vim/dict/c.dict
 "map <F6> :!ctags --fields=+iaS --extra=+q -R -f ~/.vim/systags /usr/include /usr/local/include
 map <F5> :!ctags -R --c-kinds=+p --fields=+laS --extra=+q .<CR><CR> :TlistUpdate<CR>
 map <F6> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
-map <F7> :!cscope -Rkbq .<CR><CR> :TlistUpdate<CR>
+map <F7> :!cscope -Rkbqs .<CR><CR> :TlistUpdate<CR>
 
 set tags=tags
 set tags+=./tags "add current directory's generated tags file
@@ -148,3 +148,8 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapWindowNavVim = 1
+
+"搜索高亮
+set hlsearch
+hi Search ctermfg =0 ctermbg =7
+
